@@ -1,5 +1,5 @@
 kind: pipeline
-name: lint-build-scaffolds
+name: lint-scaffolds
 type: docker
 
 trigger:
@@ -9,6 +9,7 @@ trigger:
     - main
 
 steps:
+  # Begin restoring of cache
   - name: restore-cache
     image: drillster/drone-volume-cache
     settings:
@@ -23,6 +24,7 @@ steps:
       - name: cache
         path: /cache
 
+  # Begin installation
   - name: install-minimal
     image: node:16.9.1
     depends_on: [ restore-cache ]
@@ -58,6 +60,79 @@ steps:
       - cd ./with-tailwind-mantine/frontend
       - yarn install
 
+  # Begin linting
+  - name: lint-minimal
+    image: node:16.9.1
+    depends_on: [ install-minimal ]
+    commands:
+      - cd ./minimal/frontend
+      - yarn lint
+
+  - name: lint-tailwind
+    image: node:16.9.1
+    depends_on: [ install-tailwind ]
+    commands:
+      - cd ./with-tailwind/frontend
+      - yarn lint
+
+  - name: lint-tailwind-daisyui
+    image: node:16.9.1
+    depends_on: [ install-tailwind-daisyui ]
+    commands:
+      - cd ./with-tailwind-daisyui/frontend
+      - yarn lint
+
+  - name: lint-tailwind-flowbite
+    image: node:16.9.1
+    depends_on: [ install-tailwind-flowbite ]
+    commands:
+      - cd ./with-tailwind-flowbite/frontend
+      - yarn lint
+
+  - name: lint-tailwind-mantine
+    image: node:16.9.1
+    depends_on: [ install-tailwind-mantine ]
+    commands:
+      - cd ./with-tailwind-mantine/frontend
+      - yarn lint
+
+  # Begin building
+  - name: build-minimal
+    image: node:16.9.1
+    depends_on: [ install-minimal ]
+    commands:
+      - cd ./minimal/frontend
+      - yarn build
+
+  - name: build-tailwind
+    image: node:16.9.1
+    depends_on: [ install-tailwind ]
+    commands:
+      - cd ./with-tailwind/frontend
+      - yarn build
+
+  - name: build-tailwind-daisyui
+    image: node:16.9.1
+    depends_on: [ install-tailwind-daisyui ]
+    commands:
+      - cd ./with-tailwind-daisyui/frontend
+      - yarn build
+
+  - name: build-tailwind-flowbite
+    image: node:16.9.1
+    depends_on: [ install-tailwind-flowbite ]
+    commands:
+      - cd ./with-tailwind-flowbite/frontend
+      - yarn build
+
+  - name: build-tailwind-mantine
+    image: node:16.9.1
+    depends_on: [ install-tailwind-mantine ]
+    commands:
+      - cd ./with-tailwind-mantine/frontend
+      - yarn build
+
+  # Begin rebuilding of cache
   - name: rebuild-cache
     image: drillster/drone-volume-cache
     depends_on: [install-minimal, install-tailwind, install-tailwind-daisyui, install-tailwind-flowbite, install-tailwind-mantine]
