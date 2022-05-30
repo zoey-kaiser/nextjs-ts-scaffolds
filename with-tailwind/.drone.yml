@@ -1,5 +1,5 @@
 kind: pipeline
-name: default
+name: with-tailwind
 type: docker
 
 trigger:
@@ -33,12 +33,12 @@ steps:
       - cd frontend
       - yarn lint
 
-  - name: typescript-check
+  - name: build
     image: node:16.9.1
     depends_on: [install]
     commands:
       - cd frontend
-      - yarn type-check
+      - yarn build
 
   - name: rebuild-cache
     image: drillster/drone-volume-cache
