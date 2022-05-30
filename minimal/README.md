@@ -1,4 +1,4 @@
-# NextJS-TS-Scaffold with TailwindCSS
+# Minimal NextJS-TS-Scaffold
 
 This project uses NextJS, the react framework for production.
 If you want to learn more about NextJS, please visit its website: https://nextjs.org/

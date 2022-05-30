@@ -3,13 +3,7 @@
 This project uses NextJS, the react framework for production.
 If you want to learn more about NextJS, please visit its website: https://nextjs.org/
 
-## Versions
-View all versions of the scaffold under [RELEASES](https://github.com/benediktkaiser/next-ts-scaffold/releases).
-
-We currently offer the following:
-- Minimal scaffold
-- DaisyUI scaffold
-- Mantine scaffold
+This scaffold includes a pre-configured version of the DaisyUI component library. View more [here](https://daisyui.com/).
 
 ## Usage
 
