@@ -1,4 +1,27 @@
 kind: pipeline
+name: reploy releases
+type: docker
+
+trigger:
+  event:
+    - push
+  branch:
+    - main
+
+steps:
+  - name: publish
+    image: plugins/github-release
+    settings:
+      api_key:
+        from_secret: GITHUB_ACCESS_TOKEN
+      files:
+        - with-tailwind/*
+        - with-tailwind-daisyui/*
+        - with-tailwind-mantine/*
+      title: Release
+
+---
+kind: pipeline
 name: with-tailwind
 type: docker
 
