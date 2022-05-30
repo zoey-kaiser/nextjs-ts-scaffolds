@@ -9,7 +9,7 @@ trigger:
     - main
 
 workspace:
-  path: ./frontend
+  path: ./with-tailwind/frontend
 
 steps:
   - name: restore-cache
@@ -69,7 +69,7 @@ trigger:
     - main
 
 workspace:
-  path: ./frontend
+  path: ./with-tailwind-daisyui/frontend
 
 steps:
   - name: restore-cache
@@ -129,7 +129,7 @@ trigger:
     - main
 
 workspace:
-  path: ./frontend
+  path: ./with-tailwind-mantine/frontend
 
 steps:
   - name: restore-cache
