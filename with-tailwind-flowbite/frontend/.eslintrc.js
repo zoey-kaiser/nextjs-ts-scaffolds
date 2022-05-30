@@ -28,6 +28,7 @@ module.exports = {
         'plugin:@typescript-eslint/recommended',
         'airbnb',
         'prettier',
+        'plugin:tailwind/recommended',
         'plugin:jsx-a11y/recommended',
         'plugin:prettier/recommended',
         'plugin:sonarjs/recommended',
