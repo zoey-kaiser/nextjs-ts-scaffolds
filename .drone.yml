@@ -8,16 +8,13 @@ trigger:
   branch:
     - main
 
-workspace:
-  path: ./with-tailwind/frontend
-
 steps:
   - name: restore-cache
     image: drillster/drone-volume-cache
     settings:
       restore: true
       mount:
-        - ./frontend/node_modules
+        - ./with-tailwind/frontend/node_modules
     volumes:
       - name: cache
         path: /cache
@@ -26,18 +23,21 @@ steps:
     image: node:16.9.1
     depends_on: [ restore-cache ]
     commands:
+      - cd ./with-tailwind/frontend
       - yarn install
 
   - name: lint
     image: node:16.9.1
     depends_on: [install]
     commands:
+      - cd ./with-tailwind/frontend
       - yarn lint
 
   - name: build
     image: node:16.9.1
     depends_on: [install]
     commands:
+      - cd ./with-tailwind/frontend
       - yarn build
 
   - name: rebuild-cache
@@ -46,7 +46,7 @@ steps:
     settings:
       rebuild: true
       mount:
-        - ./frontend/node_modules
+        - ./with-tailwind/frontend/node_modules
     volumes:
       - name: cache
         path: /cache
@@ -68,16 +68,13 @@ trigger:
   branch:
     - main
 
-workspace:
-  path: ./with-tailwind-daisyui/frontend
-
 steps:
   - name: restore-cache
     image: drillster/drone-volume-cache
     settings:
       restore: true
       mount:
-        - ./frontend/node_modules
+        - ./with-tailwind-daisyui/frontend/node_modules
     volumes:
       - name: cache
         path: /cache
@@ -86,18 +83,21 @@ steps:
     image: node:16.9.1
     depends_on: [ restore-cache ]
     commands:
+      - cd ./with-tailwind-daisyui/frontend
       - yarn install
 
   - name: lint
     image: node:16.9.1
     depends_on: [install]
     commands:
+      - cd ./with-tailwind-daisyui/frontend
       - yarn lint
 
   - name: build
     image: node:16.9.1
     depends_on: [install]
     commands:
+      - cd ./with-tailwind-daisyui/frontend
       - yarn build
 
   - name: rebuild-cache
@@ -106,7 +106,7 @@ steps:
     settings:
       rebuild: true
       mount:
-        - ./frontend/node_modules
+        - ./with-tailwind-daisyui/frontend/node_modules
     volumes:
       - name: cache
         path: /cache
@@ -128,16 +128,13 @@ trigger:
   branch:
     - main
 
-workspace:
-  path: ./with-tailwind-mantine/frontend
-
 steps:
   - name: restore-cache
     image: drillster/drone-volume-cache
     settings:
       restore: true
       mount:
-        - ./frontend/node_modules
+        - ./with-tailwind-mantine/frontend/node_modules
     volumes:
       - name: cache
         path: /cache
@@ -146,18 +143,21 @@ steps:
     image: node:16.9.1
     depends_on: [ restore-cache ]
     commands:
+      - cd ./with-tailwind-mantine/frontend
       - yarn install
 
   - name: lint
     image: node:16.9.1
     depends_on: [install]
     commands:
+      - cd ./with-tailwind-mantine/frontend
       - yarn lint
 
   - name: build
     image: node:16.9.1
     depends_on: [install]
     commands:
+      - cd ./with-tailwind-mantine/frontend
       - yarn build
 
   - name: rebuild-cache
@@ -166,7 +166,7 @@ steps:
     settings:
       rebuild: true
       mount:
-        - ./frontend/node_modules
+        - ./with-tailwind-mantine/frontend/node_modules
     volumes:
       - name: cache
         path: /cache

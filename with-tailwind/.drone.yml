@@ -8,9 +8,6 @@ trigger:
   branch:
     - main
 
-workspace:
-  path: ./frontend
-
 steps:
   - name: restore-cache
     image: drillster/drone-volume-cache
@@ -26,18 +23,21 @@ steps:
     image: node:16.9.1
     depends_on: [ restore-cache ]
     commands:
+      - cd ./frontend
       - yarn install
 
   - name: lint
     image: node:16.9.1
     depends_on: [install]
     commands:
+      - cd ./frontend
       - yarn lint
 
   - name: build
     image: node:16.9.1
     depends_on: [install]
     commands:
+      - cd ./frontend
       - yarn build
 
   - name: rebuild-cache
