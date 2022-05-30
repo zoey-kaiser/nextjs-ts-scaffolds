@@ -6,3 +6,12 @@ If you run into any issue feel free to [open a new issue](https://github.com/ben
 
 ## Contributing
 We generally maintain these scaffolds internally, however if you would like to open a pull request, we will be willing to look over it.
+
+## Development
+To locally zip all the scaffolds run the following command in the root directory
+
+```shell
+sh zip-scaffolds.sh
+```
+
+You will then find all the scaffolds under the `/dist` folder.
