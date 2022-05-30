@@ -1,5 +1,5 @@
 kind: pipeline
-name: Pull Request
+name: with-tailwind
 type: docker
 
 trigger:
