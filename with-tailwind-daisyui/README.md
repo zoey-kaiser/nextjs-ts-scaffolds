@@ -3,6 +3,8 @@
 This project uses NextJS, the react framework for production.
 If you want to learn more about NextJS, please visit its website: https://nextjs.org/
 
+This scaffold includes a pre-configured version of the DaisyUI component library. View more [here](https://daisyui.com/).
+
 ## Usage
 
 ```bash
