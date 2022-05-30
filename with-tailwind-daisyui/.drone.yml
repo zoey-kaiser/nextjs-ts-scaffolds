@@ -1,5 +1,5 @@
 kind: pipeline
-name: with-tailwind-daisyui
+name: lint-build-frontend
 type: docker
 
 trigger:
