@@ -1,5 +1,5 @@
 kind: pipeline
-name: default
+name: lint-build-frontend
 type: docker
 
 trigger:
@@ -7,6 +7,9 @@ trigger:
     - pull_request
   branch:
     - main
+
+workspace:
+  path: ./frontend
 
 steps:
   - name: restore-cache
@@ -23,22 +26,22 @@ steps:
     image: node:16.9.1
     depends_on: [ restore-cache ]
     commands:
-      - cd frontend
+      - cd ./frontend
       - yarn install
 
   - name: lint
     image: node:16.9.1
     depends_on: [install]
     commands:
-      - cd frontend
+      - cd ./frontend
       - yarn lint
 
-  - name: typescript-check
+  - name: build
     image: node:16.9.1
     depends_on: [install]
     commands:
-      - cd frontend
-      - yarn type-check
+      - cd ./frontend
+      - yarn build
 
   - name: rebuild-cache
     image: drillster/drone-volume-cache

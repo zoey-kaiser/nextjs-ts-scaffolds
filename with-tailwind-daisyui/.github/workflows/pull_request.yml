@@ -18,12 +18,19 @@ jobs:
         with:
           node-version: 16
           cache: "yarn"
+          cache-dependency-path: frontend/yarn.lock
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: |
+          cd ./frontend
+          yarn install --frozen-lockfile
 
       - name: Lint code
-        run: yarn lint
+        run: |
+          cd ./frontend
+          yarn lint
 
       - name: Build Project
-        run: yarn build
+        run: |
+          cd ./frontend
+          yarn build
