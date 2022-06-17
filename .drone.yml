@@ -20,6 +20,7 @@ steps:
         - ./with-tailwind-daisyui/frontend/node_modules
         - ./with-tailwind-flowbite/frontend/node_modules
         - ./with-tailwind-daisyui/frontend/node_modules
+        - ./component-library-scaffold/node_modules
     volumes:
       - name: cache
         path: /cache
@@ -60,6 +61,13 @@ steps:
       - cd ./with-tailwind-mantine/frontend
       - yarn install
 
+  - name: install-component-library-scaffold
+    image: node:16.9.1
+    depends_on: [ restore-cache ]
+    commands:
+      - cd ./component-library-scaffold
+      - yarn install
+
   # Begin linting
   - name: lint-minimal
     image: node:16.9.1
@@ -94,6 +102,20 @@ steps:
     depends_on: [ install-tailwind-mantine ]
     commands:
       - cd ./with-tailwind-mantine/frontend
+      - yarn lint
+
+  - name: lint-component-library-scaffold
+    image: node:16.9.1
+    depends_on: [ install-component-library-scaffold ]
+    commands:
+      - cd ./component-library-scaffold
+      - yarn lint
+
+  - name: test-component-library-scaffold
+    image: node:16.9.1
+    depends_on: [ install-component-library-scaffold ]
+    commands:
+      - cd ./component-library-scaffold
       - yarn lint
 
   # Begin building
@@ -132,10 +154,17 @@ steps:
       - cd ./with-tailwind-mantine/frontend
       - yarn build
 
+  - name: build-component-library-scaffold
+    image: node:16.9.1
+    depends_on: [ install-component-library-scaffold ]
+    commands:
+      - cd ./component-library-scaffold
+      - yarn build
+
   # Begin rebuilding of cache
   - name: rebuild-cache
     image: drillster/drone-volume-cache
-    depends_on: [install-minimal, install-tailwind, install-tailwind-daisyui, install-tailwind-flowbite, install-tailwind-mantine]
+    depends_on: [install-minimal, install-tailwind, install-tailwind-daisyui, install-tailwind-flowbite, install-tailwind-mantine, install-component-library-scaffold]
     settings:
       rebuild: true
       mount:
@@ -144,6 +173,7 @@ steps:
         - ./with-tailwind-daisyui/frontend/node_modules
         - ./with-tailwind-flowbite/frontend/node_modules
         - ./with-tailwind-daisyui/frontend/node_modules
+        - ./component-library-scaffold/node_modules
     volumes:
       - name: cache
         path: /cache
