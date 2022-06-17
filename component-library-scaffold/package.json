@@ -1,9 +1,9 @@
 {
-  "name": "@woolgens/web-library",
-  "version": "0.1.4",
-  "description": "A component library for WoolGens web apps",
-  "author": "Woolgens",
-  "homepage": "https://woolgens.net",
+  "name": "component-library-scaffold",
+  "version": "1.0.0",
+  "description": "A component library scaffold",
+  "author": "YOUR_NAME",
+  "homepage": "YOUR_WEBSITE",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "files": [
